@@ -1,9 +1,10 @@
-# raspberry
+# helios - always on
 
 -   pihole: ad blocker
 -   home-assistant: home automation
 
-# ananas
+# ares - arr stack
+
 
 -   jellyfin: streaming
 -   radarr: movies
