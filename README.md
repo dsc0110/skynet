@@ -1,10 +1,11 @@
-# helios - always on
+# helios - god of the sun
+central server, all devices connect here, always on
 
 -   pihole: ad blocker
 -   home-assistant: home automation
 
-# ares - arr stack
-
+# ares - god of war
+arr stack: streaming & downloading
 
 -   jellyfin: streaming
 -   radarr: movies
