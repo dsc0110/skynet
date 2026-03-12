@@ -1,8 +1,8 @@
 # ares
 
 ```
-mkdir -p {REPODIR}/ares/appdata/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
-mkdir -p {REPODIR}/ares/data/{torrents/{shows,movies,music},media/{shows,movies,music}}
+mkdir -p /home/skynet/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
+mkdir -p /home/skynet/data/{torrents/{shows,movies,music},media/{shows,movies,music}}
 ```
 
 ## jellyfin

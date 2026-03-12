@@ -1,14 +1,14 @@
 # helios
 
 ```
-mkdir -p {REPODIR}/helios/appdata/{pihole,home-assistant}
+mkdir -p /home/skynet/{pihole,home-assistant}
 
 vim /etc/fstab
-UUID={UUID}       {REPODIR}/helios/data    ext4    defaults        0       2
+UUID={UUID}       /home/skynet/data    ext4    defaults        0       2
 
 vim /etc/samba/smb.conf
 [data]
-path = {REPODIR}/helios/data
+path = /home/skynet/data
 writeable = yes
 browseable = yes
 public = yes

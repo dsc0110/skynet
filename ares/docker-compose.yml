@@ -16,9 +16,9 @@ services:
     environment:
       - TZ=${TZ} 
     volumes:
-      - ${DOCKERCONFDIR}/jellyfin/config:/config:rw
-      - ${DOCKERCONFDIR}/jellyfin/cache:/cache:rw
-      - ${DOCKERCONFDIR}/jellyfin/logs:/logs:rw
+      - ./jellyfin/config:/config:rw
+      - ./jellyfin/cache:/cache:rw
+      - ./jellyfin/logs:/logs:rw
       - ${DATADIR}/media:/media:rw
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
@@ -44,7 +44,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${DOCKERCONFDIR}/radarr:/config
+      - ./radarr:/config
       - ${DATADIR}:/data
 
   sonarr:
@@ -66,7 +66,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${DOCKERCONFDIR}/sonarr:/config
+      - ./sonarr:/config
       - ${DATADIR}:/data
 
   bazarr:
@@ -88,7 +88,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${DOCKERCONFDIR}/bazarr:/config
+      - ./bazarr:/config
       - ${DATADIR}/media:/data/media
 
   prowlarr:
@@ -110,7 +110,7 @@ services:
       - UMASK=002
       - ARGS=
     volumes:
-      - ${DOCKERCONFDIR}/prowlarr:/config:rw
+      - ./prowlarr:/config:rw
 
   transmission:
     container_name: transmission
@@ -131,5 +131,5 @@ services:
       - TZ=${TZ}
       - VERSION=docker
     volumes:
-      - ${DOCKERCONFDIR}/transmission/config:/config
+      - ./transmission/config:/config
       - ${DATADIR}/torrents:/data/torrents
