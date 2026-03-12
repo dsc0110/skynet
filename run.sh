@@ -24,20 +24,10 @@ fi
 echo "Entering directory: $DIR"
 cd "$DIR"
 
-# Verify docker is available
-if ! command -v docker >/dev/null 2>&1; then
-  echo "Error: docker is not installed or not in PATH" >&2
-  exit 1
-fi
+# read env
+set -a
+source .env
+set +a
 
-echo "Pulling images..."
-docker compose pull
-
-echo "Starting containers..."
-docker compose up -d --remove-orphans
-
-echo "Cleaning up..."
-docker image prune -af
-
-echo "Completed update and start in $DIR"
-docker compose ps
+# substitute, copy to remote, start
+envsubst <docker-compose.yml | ssh skynet@$SERVER.local "cat > /home/skynet/docker-compose.yml && cd /home/skynet && docker compose pull && docker compose up -d --remove-orphans && docker image prune -af && docker compose ps"
