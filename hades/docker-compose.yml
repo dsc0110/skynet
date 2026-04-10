@@ -26,3 +26,11 @@ services:
       # By default, DumbPad includes support for all ~180 languages supported by highlight.js.
       # view entire list and usage in /docs/MARKDOWN_SYNTAX_HIGHLIGHTING_USAGE.md
       # HIGHLIGHT_LANGUAGES=c,csharp,css,dockerfile,go,html,java,javascript,json,kotlin,markdown,perl,php,python,ruby,sql,swift,typescript,xml,yaml
+
+  it-tools:
+      image: corentinth/it-tools
+      tty: true
+      stdin_open: true
+      container_name: it-tools
+      ports:
+      - '${ITTOOLS_PORT:-8080}:80'
