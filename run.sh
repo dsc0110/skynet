@@ -7,6 +7,9 @@ IFS=$'\n\t'
 SERVER="${1-}"
 if [ -z "$SERVER" ]; then
   SERVER="$(hostname -s)"
+  if [ $SERVER == "md63kpfc" ]; then
+    SERVER="hades"
+  fi
 fi
 
 # Look for a matching subdirectory (first check exact child, then case-insensitive search)
@@ -29,5 +32,15 @@ set -a
 source .env
 set +a
 
-# substitute, copy to remote, start
-envsubst <docker-compose.yml | ssh skynet@$SERVER.local "cat > /home/skynet/docker-compose.yml && cd /home/skynet && docker compose pull && docker compose up -d --remove-orphans && docker image prune -af && docker compose ps"
+# substitute and deploy
+if [ -n "${1-}" ]; then
+  envsubst <docker-compose.yml | ssh skynet@$SERVER.local "cat > /home/skynet/docker-compose.yml && cd /home/skynet && docker compose pull && docker compose up -d --remove-orphans && docker image prune -af && docker compose ps"
+else
+  # No argument - deploy locally to user home
+  envsubst <docker-compose.yml >~/docker-compose.yml
+  cd ~
+  docker compose pull
+  docker compose up -d --remove-orphans
+  docker image prune -af
+  docker compose ps
+fi
