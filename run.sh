@@ -34,7 +34,7 @@ set +a
 
 # substitute and deploy
 if [ -n "${1-}" ]; then
-  envsubst <docker-compose.yml | ssh skynet@$SERVER.local "cat > /home/skynet/docker-compose.yml && cd /home/skynet && docker compose pull && docker compose up -d --remove-orphans && docker image prune -af && docker compose ps"
+  envsubst <docker-compose.yml | ssh lab@$SERVER.local "cat > /home/lab/docker-compose.yml && cd /home/lab && docker compose pull && docker compose up -d --remove-orphans && docker image prune -af && docker compose ps"
 else
   # No argument - deploy locally to user home
   envsubst <docker-compose.yml >~/docker-compose.yml
