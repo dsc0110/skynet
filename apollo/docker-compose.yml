@@ -6,9 +6,8 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      # - ./glances.conf:/home/lab/share/glances/glances.conf:ro
       - /home/lab/share/glances/glances.conf:/glances/conf/glances.conf:ro
-      - /mnt/drive1:/mnt/drive1:ro
+      - ${DATADRIVE}:${DATADRIVE}:ro
       - /mnt/drive2:/mnt/drive2:ro
     environment:
       - PUID=${PUID}
@@ -36,7 +35,7 @@ services:
       - ./share/jellyfin/config:/config:rw
       - ./share/jellyfin/cache:/cache:rw
       - ./share/jellyfin/logs:/logs:rw
-      - ${DATADIR}/media:/media:rw
+      - ${DATADRIVE}/media:/media:rw
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
