@@ -1,18 +1,43 @@
 services:
   glances:
-    image: nicolargo/glances:latest-full
     container_name: glances
+    image: nicolargo/glances:latest-full
     pid: host
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./glances.conf:/home/lab/share/glances/glances.conf:ro
+      # - ./glances.conf:/home/lab/share/glances/glances.conf:ro
+      - /home/lab/share/glances/glances.conf:/glances/conf/glances.conf:ro
       - /mnt/drive1:/mnt/drive1:ro
       - /mnt/drive2:/mnt/drive2:ro
-      # - /proc:/host/proc:ro
-      # - /sys:/host/sys:ro
-      # - /etc:/host/etc:ro
     environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - GLANCES_OPT=-w
     restart: unless-stopped
 
+  jellyfin:
+    container_name: jellyfin
+    image: jellyfin/jellyfin:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-file: ${DOCKERLOGGING_MAXFILE}
+        max-size: ${DOCKERLOGGING_MAXSIZE}
+    user: ${PUID}:${PGID}
+    ports:
+      - 8096:8096/tcp
+      - 7359:7359/udp
+    environment:
+      - TZ=${TZ} 
+    volumes:
+      - ./share/jellyfin/config:/config:rw
+      - ./share/jellyfin/cache:/cache:rw
+      - ./share/jellyfin/logs:/logs:rw
+      - ${DATADIR}/media:/media:rw
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri:/dev/dri
