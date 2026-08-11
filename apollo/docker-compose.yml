@@ -6,7 +6,7 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./glances.conf:/home/lab/glances/glances.conf:ro
+      - ./glances.conf:/home/lab/share/glances/glances.conf:ro
       - /mnt/drive1:/mnt/drive1:ro
       - /mnt/drive2:/mnt/drive2:ro
       # - /proc:/host/proc:ro
