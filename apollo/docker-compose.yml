@@ -8,7 +8,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /home/lab/share/glances/glances.conf:/glances/conf/glances.conf:ro
       - ${DATADRIVE}:${DATADRIVE}:ro
-      - /mnt/drive2:/mnt/drive2:ro
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
