@@ -3,36 +3,55 @@
   <thead>
     <tr>
       <th>Server</th>
-      <th>Docker Services</th>
+      <th>Services</th>
+      <th>Shares</th>
     </tr>
   </thead>
   <tr>
     <td style="font-weight:bold;">Artemis</td>
-    <td><code>pihole</code>, <code>home-assistant</code>, <code>gitea</code></td>
+    <td><code>pihole</code>, <code>home-assistant</code>, <code>gitea</code>, <code>obsidian</code></td>
+    <td>Obsidian, Proton, Code</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Apollo</td>
     <td><code>jellyfin</code>, <code>radarr</code>, <code>sonarr</code>, <code>prowlarr</code>, <code>transmission</code>, <code>glances</code></td>
+    <td>Media</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Hermes</td>
     <td><code>backup</code></td>
+    <td>Media</td>
   </tr>
 </table>
 
 ## Artemis
 ```
-mkdir -p /home/lab/{pihole,home-assistant}
+mkdir -p /home/lab/share/{pihole,home-assistant}
 
-vim /etc/fstab
+/etc/fstab
 UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 
-vim /etc/samba/smb.conf
-[data]
-path = /madie/drive
-writeable = yes
-browseable = yes
-public = yes
+/etc/samba/smb.conf
+[HomeLabShare]
+   comment = Home Lab Share
+   path = /home/lab/share
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = lab
+   force create mode = 0644
+   force directory mode = 0755
+
+[FileShare]
+  comment = Obsidian, Proton, Code
+  path = /mnt/drive/files
+  browseable = yes
+  read only = no
+  guest ok = no
+  valid users = lab
+  force create mode = 0644
+  force directory mode = 0755
+
 ```
 
 | Service | Configuration Steps |
@@ -43,8 +62,32 @@ public = yes
 
 ## Apollo
 ```
-mkdir -p /home/lab/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
-mkdir -p /home/lab/data/{torrents/{shows,movies,music},media/{shows,movies,music}}
+mkdir -p /home/lab/share/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
+
+/etc/fstab
+UUID={UUID}       /mnt/drive    ext4    defaults        0       2
+
+/etc/samba/smb.conf
+[HomeLabShare]
+   comment = Home Lab Share
+   path = /home/lab/share
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = lab
+   force create mode = 0644
+   force directory mode = 0755
+
+[MediaShare]
+  comment = Movies, Shows, Music
+  path = /mnt/drive/media
+  browseable = yes
+  read only = no
+  guest ok = no
+  valid users = lab
+  force create mode = 0644
+  force directory mode = 0755
+
 ```
 
 | Service | Configuration Steps |
