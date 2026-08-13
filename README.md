@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tr>
-    <td style="font-weight:bold;">Artemis</td>
+    <td style="font-weight:bold;">Apollo</td>
     <td><code>pihole</code>, <code>home-assistant</code>, <code>gitea</code>, <code>obsidian</code></td>
     <td>Obsidian, Proton, Code</td>
   </tr>
   <tr>
-    <td style="font-weight:bold;">Apollo</td>
+    <td style="font-weight:bold;">Artemis</td>
     <td><code>jellyfin</code>, <code>radarr</code>, <code>sonarr</code>, <code>prowlarr</code>, <code>transmission</code>, <code>glances</code></td>
     <td>Media</td>
   </tr>
@@ -24,7 +24,7 @@
   </tr>
 </table>
 
-## Artemis
+## Apollo
 ```
 mkdir -p /home/lab/share/{pihole,home-assistant}
 
@@ -60,7 +60,7 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 | **home-assistant** | <ul><li>todo: backup dashboards</li></ul> |
 
 
-## Apollo
+## Artemis
 ```
 mkdir -p /home/lab/share/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
 
@@ -98,6 +98,6 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 | **radarr** | <ul><li>Set download client: `transmission`</li></ul> |
 | **sonarr** | <ul><li>Set download client: `transmission`</li></ul> |
 
-## hermes
+## Hermes
 -   backup (1,2,3)
 
