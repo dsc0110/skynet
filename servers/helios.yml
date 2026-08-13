@@ -15,8 +15,8 @@ services:
       - "8081:80/tcp"
     environment:
       TZ: ${TZ}
-      PIHOLE_UID: ${PUID}
-      PIHOLE_GID: ${PGID}
+      PIHOLE_UID: 1002
+      PIHOLE_GID: 1002
       FTLCONF_dns_listeningMode: 'all' # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       FTLCONF_dns_piholePTR: 'PI.HOLE'
       FTLCONF_dns_revServers: 'true,${LOCAL_NETWORK},${ROUTER_IP},lan'
@@ -46,8 +46,8 @@ services:
       - /dev/ttyACM0
     environment:
       - TZ=${TZ}
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1002
+      - PGID=1002
       
 networks:
   proxy:

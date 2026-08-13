@@ -9,8 +9,8 @@ services:
       - /home/lab/share/glances/glances.conf:/glances/conf/glances.conf:ro
       - ${DRIVEFOLDER}:${DRIVEFOLDER}:ro
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1001
+      - PGID=1001
       - TZ=${TZ}
       - GLANCES_OPT=-w
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
       options:
         max-file: ${DOCKERLOGGING_MAXFILE}
         max-size: ${DOCKERLOGGING_MAXSIZE}
-    user: ${PUID}:${PGID}
+    user: 1001:1001
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp

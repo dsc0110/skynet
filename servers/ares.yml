@@ -9,7 +9,7 @@ services:
       options:
         max-file: ${DOCKERLOGGING_MAXFILE}
         max-size: ${DOCKERLOGGING_MAXSIZE}
-    user: ${PUID}:${PGID}
+    user: 1000:10
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp
@@ -19,7 +19,7 @@ services:
       - ./jellyfin/config:/config:rw
       - ./jellyfin/cache:/cache:rw
       - ./jellyfin/logs:/logs:rw
-      - ${DATADIR}/media:/media:rw
+      - ${ARES_DATADIR}/media:/media:rw
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
@@ -38,14 +38,14 @@ services:
     ports:
       - 7878:7878
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1000
+      - PGID=10
       - TZ=${TZ}
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./radarr:/config
-      - ${DATADIR}:/data
+      - ${ARES_DATADIR}:/data
 
   sonarr:
     container_name: sonarr
@@ -60,14 +60,14 @@ services:
     ports:
       - 8989:8989
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1000
+      - PGID=10
       - TZ=${TZ}
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./sonarr:/config
-      - ${DATADIR}:/data
+      - ${ARES_DATADIR}:/data
 
   bazarr:
     container_name: bazarr
@@ -82,14 +82,14 @@ services:
     ports:
       - 6767:6767
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1000
+      - PGID=10
       - TZ=${TZ}
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./bazarr:/config
-      - ${DATADIR}/media:/data/media
+      - ${ARES_DATADIR}/media:/data/media
 
   prowlarr:
     container_name: prowlarr
@@ -104,8 +104,8 @@ services:
     ports:
       - 9696:9696
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1000
+      - PGID=10
       - TZ=${TZ}
       - UMASK=002
       - ARGS=
@@ -126,10 +126,10 @@ services:
       - 9091:9091
       - 51413:51413
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - PUID=1000
+      - PGID=10
       - TZ=${TZ}
       - VERSION=docker
     volumes:
       - ./transmission/config:/config
-      - ${DATADIR}/torrents:/data/torrents
+      - ${ARES_DATADIR}/torrents:/data/torrents
