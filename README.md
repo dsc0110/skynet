@@ -33,7 +33,7 @@
 mkdir -p /home/lab/share/{pihole,home-assistant}
 
 /etc/fstab
-UUID={UUID}       /mnt/drive    ext4    defaults        0       2
+UUID={UUID}      /mnt/drive     ext4    defaults,uid=1002,gid=1002,nofail         0       2
 
 /etc/samba/smb.conf
 [homelab]

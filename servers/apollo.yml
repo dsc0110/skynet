@@ -23,7 +23,7 @@ services:
       FTLCONF_dns_domain_name: 'lan' # required?
       FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
     volumes:
-      - ./pihole/etc/pihole:/etc/pihole
+      - ./share/pihole/etc/pihole:/etc/pihole
     networks:
       - proxy
 
@@ -39,7 +39,7 @@ services:
         max-size: ${DOCKERLOGGING_MAXSIZE}
     privileged: true
     volumes:
-      - ./home-assistant/config:/config
+      - ./share/home-assistant/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     devices:
