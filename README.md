@@ -2,25 +2,29 @@
 <table>
   <thead>
     <tr>
-      <th>Server</th>
+      <th>Host</th>
+      <th>IP</th>
       <th>Services</th>
       <th>Shares</th>
     </tr>
   </thead>
   <tr>
     <td style="font-weight:bold;">Apollo</td>
+    <td>192.168.179.100</td>
     <td><code>pihole</code>, <code>home-assistant</code>, <code>gitea</code>, <code>obsidian</code></td>
     <td>Obsidian, Proton, Code</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Artemis</td>
+    <td>192.168.179.101</td>
     <td><code>jellyfin</code>, <code>radarr</code>, <code>sonarr</code>, <code>prowlarr</code>, <code>transmission</code>, <code>glances</code></td>
-    <td>Media</td>
+    <td>Movies, Shows, Music</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Hermes</td>
-    <td><code>backup</code></td>
-    <td>Media</td>
+    <td>192.168.179.102</td>
+    <td><code>backup</code>, <code>glances</code></td>
+    <td>Movies, Shows, Music</td>
   </tr>
 </table>
 
@@ -32,7 +36,7 @@ mkdir -p /home/lab/share/{pihole,home-assistant}
 UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 
 /etc/samba/smb.conf
-[HomeLabShare]
+[homelab]
    comment = Home Lab Share
    path = /home/lab/share
    browseable = yes
@@ -42,7 +46,7 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
    force create mode = 0644
    force directory mode = 0755
 
-[FileShare]
+[files]
   comment = Obsidian, Proton, Code
   path = /mnt/drive/files
   browseable = yes
@@ -63,12 +67,16 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 ## Artemis
 ```
 mkdir -p /home/lab/share/{radarr,sonarr,prowlarr,servarr,jellyfin,transmission}
+mkdir -p /mnt/{drive,hermes}
+
+sudo apt install cifs-utils
 
 /etc/fstab
 UUID={UUID}       /mnt/drive    ext4    defaults        0       2
+//192.168.178.102/share         /mnt/hermes     cifs    credentials=/etc/samba/creds,vers=3.0,uid=1001,gid=1001,noauto,x-systemd.automount,x-systemd.mount-timeout=30   0
 
 /etc/samba/smb.conf
-[HomeLabShare]
+[homelab]
    comment = Home Lab Share
    path = /home/lab/share
    browseable = yes
@@ -78,7 +86,7 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
    force create mode = 0644
    force directory mode = 0755
 
-[MediaShare]
+[media]
   comment = Movies, Shows, Music
   path = /mnt/drive/media
   browseable = yes
