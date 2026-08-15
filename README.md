@@ -10,19 +10,19 @@
   </thead>
   <tr>
     <td style="font-weight:bold;">Apollo</td>
-    <td>192.168.179.100</td>
+    <td>192.168.178.100</td>
     <td><code>pihole</code>, <code>home-assistant</code>, <code>gitea</code>, <code>obsidian</code></td>
     <td>Obsidian, Proton, Code</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Artemis</td>
-    <td>192.168.179.101</td>
+    <td>192.168.178.101</td>
     <td><code>jellyfin</code>, <code>radarr</code>, <code>sonarr</code>, <code>prowlarr</code>, <code>transmission</code>, <code>glances</code></td>
     <td>Movies, Shows, Music</td>
   </tr>
   <tr>
     <td style="font-weight:bold;">Hermes</td>
-    <td>192.168.179.102</td>
+    <td>192.168.178.102</td>
     <td><code>backup</code>, <code>glances</code></td>
     <td>Movies, Shows, Music</td>
   </tr>

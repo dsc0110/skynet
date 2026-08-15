@@ -6,7 +6,7 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/lab/share/glances/glances.conf:/glances/conf/glances.conf:ro
+      - ${HOMELABSHARE}/glances/glances.conf:/glances/conf/glances.conf:ro
       - ${DRIVEFOLDER}:${DRIVEFOLDER}:ro
     environment:
       - PUID=1001
@@ -31,9 +31,9 @@ services:
     environment:
       - TZ=${TZ} 
     volumes:
-      - ./share/jellyfin/config:/config:rw
-      - ./share/jellyfin/cache:/cache:rw
-      - ./share/jellyfin/logs:/logs:rw
+      - ${HOMELABSHARE}/jellyfin/config:/config:rw
+      - ${HOMELABSHARE}/jellyfin/cache:/cache:rw
+      - ${HOMELABSHARE}/jellyfin/logs:/logs:rw
       - ${DRIVEFOLDER}/media:/localmedia:rw
       - ${HERMESSHARE}/media:/hermesmedia:rw
     devices:
@@ -60,7 +60,7 @@ services:
       - TZ=${TZ}
       - VERSION=docker
     volumes:
-      - ./share/transmission/config:/config
+      - ${HOMELABSHARE}/transmission/config:/config
       - ${DRIVEFOLDER}/torrents:/data/torrents
 
   radarr:
@@ -82,7 +82,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./share/radarr:/config
+      - ${HOMELABSHARE}/radarr:/config
       - ${DRIVEFOLDER}:/data
 
   sonarr:
@@ -104,7 +104,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./share/sonarr:/config
+      - ${HOMELABSHARE}/sonarr:/config
       - ${DRIVEFOLDER}:/data
 
   bazarr:
@@ -126,7 +126,7 @@ services:
       - UMASK=002
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./share/bazarr:/config
+      - ${HOMELABSHARE}/bazarr:/config
       - ${DRIVEFOLDER}/media:/data/media
 
   prowlarr:
@@ -148,4 +148,4 @@ services:
       - UMASK=002
       - ARGS=
     volumes:
-      - ./share/prowlarr:/config:rw
+      - ${HOMELABSHARE}/prowlarr:/config:rw
