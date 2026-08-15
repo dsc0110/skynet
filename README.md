@@ -103,7 +103,7 @@ UUID={UUID}       /mnt/drive    ext4    defaults        0       2
 | **jellyfin** | <ul><li>Enable Hardware acceleration: Intel QuickSync (QSV)</li><li>Enable hardware decoding for: H264, HEVC, MPEG2, VC1, VP8, VP9, HEVC 10bit, HEVC RExt 8/10bit, HEVC RExt 12bit</li></ul> |
 | **transmission** | <ul><li>Set download folder: `/media/torrents`</li></ul> |
 | **prowlarr** | <ul><li>Set download client: `transmission`</li><li>Add application: `radarr` (use API key from Radarr)</li><li>Add application: `sonarr` (use API key from Sonarr)</li></ul> |
-| **radarr** | <ul><li>Set download client: `transmission`</li></ul> |
+| **radarr** | <ul><li>Set download client: `transmission`</li><li>Add Root folder: /data/media/movies</li><li>Add Indexer TPB (Torznab, )</li></ul> |
 | **sonarr** | <ul><li>Set download client: `transmission`</li></ul> |
 
 ## Hermes
