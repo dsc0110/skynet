@@ -15,8 +15,8 @@ services:
       - "8081:80/tcp"
     environment:
       TZ: ${TZ}
-      PIHOLE_UID: 1002
-      PIHOLE_GID: 1002
+      PIHOLE_UID: ${APOLLO_UID}
+      PIHOLE_GID: ${APOLLO_GID}
       FTLCONF_dns_listeningMode: 'all' # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       FTLCONF_dns_piholePTR: 'PI.HOLE'
       FTLCONF_dns_revServers: 'true,${LOCAL_NETWORK},${ROUTER_IP},lan'
@@ -46,8 +46,43 @@ services:
       - /dev/ttyACM0
     environment:
       - TZ=${TZ}
-      - PUID=1002
-      - PGID=1002
+      - PUID=${APOLLO_UID}
+      - PGID=${APOLLO_GID}
+
+  gitea:
+    container_name: gitea
+    image: docker.gitea.com/gitea:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-file: ${DOCKERLOGGING_MAXFILE}
+        max-size: ${DOCKERLOGGING_MAXSIZE}
+    environment:
+      - USER_UID=${APOLLO_UID}
+      - USER_GID=${APOLLO_GID}
+    networks:
+      - gitea
+    volumes:
+      - ${HOMELABSHARE}/gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
       
+  gitea-tunnel:
+    container_name: gitea-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${CODE_TUNNEL_TOKEN}
+    networks:
+      - internal
+
 networks:
   proxy:
+  gitea:
+    external: false
+  internal:
